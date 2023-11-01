@@ -1,0 +1,27 @@
+html,
+body {
+  height: auto;
+  width: 100%;
+  margin: 0;
+  background-color: #E6E6E6;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "Roboto", sans-serif;
+  color: #0D2233;
+}
+
+li, a, ul {
+  list-style-type: none;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  color: #0D2233;
+}
+
+#img {
+  width: 450px;
+}
+
+/*# sourceMappingURL=style.css.map */

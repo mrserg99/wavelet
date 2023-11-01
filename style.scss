@@ -1,0 +1,25 @@
+$dark: #0D2233;
+$main_color: #E6E6E6;
+$button_color: #2D6782;
+html,
+body{
+  height: auto;
+  width: 100%;
+  margin: 0;
+  background-color: $main_color;
+}
+p,h1,h2,h3,h4,h5,h6{
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "Roboto", sans-serif;
+  color: $dark;
+}
+li, a, ul{
+  list-style-type: none;
+  text-decoration: none;
+  font-family: "Roboto", sans-serif;
+  color: $dark;
+}
+#img{
+  width: 450px;
+}
