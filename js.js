@@ -1,6 +1,11 @@
+const ctxImg = document.getElementById('image').getContext('2d')
+const pixelSpan = document.getElementById('max-pixel-count')
+var canvas = document.getElementById('image');
+var canvasMin = document.getElementById('min')
+var canvasMax = document.getElementById('max')
+
 function getImageBrightness(imageSrc, callback) {
     var img = document.createElement('img'),
-   // var img = document.getElementById("img")
         colorSum = 0,
         i = 0,
         len,
@@ -28,27 +33,47 @@ function getImageBrightness(imageSrc, callback) {
         ctx.drawImage(this, 0, 0, 450, 400);
 
         imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        imageDataMin = dataMin.getImageData(0,0, 450,400);
+        imageDataMax = dataMax.getImageData(0,0, 450,400);
+
         data = imageData.data;
+        dataMin = imageDataMin.dataMin;
+        dataMax = imageDataMax.dataMax;
 
-        let brightnessPixel;
-        for (i, len = data.length; i < len; i += 4) {
-            r = data[i];
-            g = data[i + 1];
-            b = data[i + 2];
-         //   alert()
-            brightnessPixel[i] = (2 * r + g + 3 * b) / 6;
-            colorSum += avg;
+        for (var i = 0; i < data.length; i += 4) {
+            let red = data[i], green = data[i + 1], blue = data[i + 2];
+
+
+            var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+            data[i] = avg; // red
+            data[i + 1] = avg; // green
+            data[i + 2] = avg; // blue
+
+          //  data1=data[i];
+
+            data[i+2] = avg + data[i+1] ;
+            data[i+1] = avg - data[i+1];
         }
+        ctxImg.putImageData(imageData, 0, 0);
 
-
-       // brightness = Math.floor(colorSum / (this.width * this.height));
+        brightness = Math.floor(colorSum / (this.width * this.height));
         callback(brightness);
     };
 }
 
 
 getImageBrightness('./pic1.jpg', function (brightness) {
-    alert(brightness);
-    console.log(brightness);
+  //  alert(brightness);
+   // console.log(brightness);
 });
 
+
+document.getElementById('btn-download').addEventListener('click', function(e) {
+    let canvasUrl = canvas.toDataURL("image/jpeg", 0.5);
+    console.log(canvasUrl);
+    const createEl = document.createElement('a');
+    createEl.href = canvasUrl;
+    createEl.download = "cat_img";
+    createEl.click();
+    createEl.remove();
+});
